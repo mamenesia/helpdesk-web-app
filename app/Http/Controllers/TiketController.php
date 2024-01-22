@@ -178,7 +178,7 @@ class TiketController extends Controller
 
     public function show($id)
     {
-        $tiket = Tiket::with('prioritas', 'status')->find($id);
+        $tiket = Tiket::with('prioritas', 'status', 'user', 'balasan')->find($id);
 
         if (!$tiket) {
             return redirect()->back()->with('error', 'Ticket not found');

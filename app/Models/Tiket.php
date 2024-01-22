@@ -40,6 +40,13 @@ class Tiket extends Model
     {
         return $this->belongsTo(Divisi::class, 'divisi_id');
     }
-
+    public function balasan()
+    {
+        return $this->hasMany(Reply::class, 'tiket_id');
+    }
+    public function file()
+    {
+        return $this->hasMany(File::class, 'tiket_id');
+    }
     public $timestamps = true;
 }

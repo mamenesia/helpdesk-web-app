@@ -17,13 +17,13 @@
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class='container mx-auto flex flex-wrap items-center'>
                     <div class='flex w-full content-center justify-start md:w-1/2 '>
-                        <a class='pr-3' href='#'>
+                        <a class='pr-3' href='{{route('tiket.daftar')}}'>
                             <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" fill="white"/>
                                 <path d="M14.5 17L9.5 12L14.5 7" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <a class="pt-1 pr-3" href='#'>
+                        <a class="pt-1 pr-3" href='/tiket/$id'>
                             <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" fill="white"/>
                                 <path d="M21.3687 13.5827C21.4144 13.3104 21.2306 13.0526 20.9583 13.0069C20.686 12.9612 20.4281 13.1449 20.3825 13.4173L21.3687 13.5827ZM12 20.5C7.30558 20.5 3.5 16.6944 3.5 12H2.5C2.5 17.2467 6.75329 21.5 12 21.5V20.5ZM3.5 12C3.5 7.30558 7.30558 3.5 12 3.5V2.5C6.75329 2.5 2.5 6.75329 2.5 12H3.5ZM12 3.5C15.3367 3.5 18.2252 5.4225 19.6167 8.22252L20.5122 7.77748C18.9583 4.65062 15.7308 2.5 12 2.5V3.5ZM20.3825 13.4173C19.7081 17.437 16.2112 20.5 12 20.5V21.5C16.7077 21.5 20.6148 18.0762 21.3687 13.5827L20.3825 13.4173Z" fill="#000000"/>
@@ -45,9 +45,16 @@
                 </div>
                 <hr class="h-px my-8 bg-gray-200 border-0">
                 <p class="mb-3 text-2xl font-normal text-gray-700">{{$tiket->judul}}</p>
+                <p class="mb-3 text-xl font-normal text-gray-600">{{$tiket->deskripsi}}</p>
+                <p class="mb-3 text-sm font-normal text-gray-500">Pengaju: {{$tiket->pengaju}}</p>
+                <p class="mb-3 text-sm font-normal text-gray-500">Aplikasi: {{$tiket->aplikasi}}</p>
+                <p class="mb-3 text-sm font-normal text-gray-500">Divisi: {{$tiket->divisi->nama_divisi}}</p>
+                <p class="mb-3 text-sm font-normal text-gray-500">Prioritas: {{$tiket->prioritas->nama_prioritas}}</p>
+                <p class="mb-3 text-sm font-normal text-gray-500">Status: {{$tiket->status->nama_status}}</p>
+
             </div>
         </div>
-        <div class='mx-auto container flex flex-wrap items-center min-w-7xl'>
+        <div class='mx-auto container flex flex-wrap items-center min-w-7xl overflow-auto h-[700px]'>
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow divide-y">
                 <div class='pb-4'>
                     <form method="POST" action='{{route('tiket.reply')}}'>
@@ -70,38 +77,21 @@
                     </form>
                 </div>
                 <div class='pt-4'>
+                    @foreach ($tiket->balasan as $balasan)
                     <ol class="relative border-s border-gray-200">                  
                         <li class="mb-10 ms-6">            
                             <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white">
                                 
                             </span>
                             <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex">
-                                <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">just now</time>
-                                <div class="text-sm font-normal text-gray-500 ">Bonnie moved <a href="#" class="font-semibold text-blue-600 hover:underline">Jese Leos</a> to <span class="bg-gray-100 text-gray-800 text-xs font-normal me-2 px-2.5 py-0.5 rounded">Funny Group</span></div>
-                            </div>
-                        </li>
-                        <li class="mb-10 ms-6">
-                            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white">
-                                
-                            </span>
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm ">
-                                <div class="items-center justify-between mb-3 sm:flex">
-                                    <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">2 hours ago</time>
-                                    <div class="text-sm font-normal text-gray-500 lex ">Thomas Lean commented on  <a href="#" class="font-semibold text-gray-900 hover:underline">Flowbite Pro</a></div>
+                                <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{$balasan->created_at}}</time>
+                                <div class="text-sm font-normal text-gray-500 ">
+                                    <a class='text-gray-900 font-semibold'> {{$balasan->user->nama}}:</a> {{$balasan->balasan}}
                                 </div>
-                                <div class="p-3 text-xs italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50">Hi ya'll! I wanted to share a webinar zeroheight is having regarding how to best measure your design system! This is the second session of our new webinar series on #DesignSystems discussions where we'll be speaking about Measurement.</div>
-                            </div>
-                        </li>
-                        <li class="ms-6">
-                            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white">
-                               
-                            </span>
-                            <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex">
-                                <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">1 day ago</time>
-                                <div class="text-sm font-normal text-gray-500 lex ">Jese Leos has changed <a href="#" class="font-semibold text-blue-600 hover:underline">Pricing page</a> task status to  <span class="font-semibold text-gray-900">Finished</span></div>
                             </div>
                         </li>
                     </ol>
+                    @endforeach
                 </div>
             </div>
         </div>

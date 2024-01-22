@@ -18,23 +18,23 @@
                     <div class="flex w-full pt-2 content-center md:w-1/2 md:justify-end">
                         <ul class="flex md:flex-none items-center">
                             <li class="mr-3">
-                                <a class="py-2 px-4 text-black no-underline" href="#">Home</a>
+                                <a class="py-2 px-4 text-black no-underline" href="{{url('/')}}">Home</a>
                             </li>
                             <li class="mr-3 group/item">
                                 <a class="text-black no-underline inline-block py-2 px-4 " href="#">
                                     <span>Help Desk</span>
                                 </a>
                                 <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
-                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block" href="{{route('tiket.ajukan')}}">Ajukan Topik</a></li>
-                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block" href="{{route('tiket.daftar')}}">Daftar Topik</a></li>
+                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="{{route('tiket.ajukan')}}">Ajukan Topik</a></li>
+                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="{{route('tiket.daftar')}}">Daftar Topik</a></li>
                                 </ul>
                             </li>
 
                             <li class="mr-3 group/item">
                                 <a class="text-black no-underline block py-2 px-4" href="#">Master</a>
                                 <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
-                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block" href="user">Daftar User</a></li>
-                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block" href="divisi">Daftar Divisi</a></li>
+                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="user">Daftar User</a></li>
+                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="divisi">Daftar Divisi</a></li>
                                 </ul>
                             </li>
                             <li class="mr-3">
@@ -47,8 +47,8 @@
                                     <span>{{ Auth::user()->nama }}</span>
                                 </a>
                                 <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
-                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block" href="#">Profile</a></li>
-                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block" href="#"
+                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="#">Profile</a></li>
+                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="#"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
