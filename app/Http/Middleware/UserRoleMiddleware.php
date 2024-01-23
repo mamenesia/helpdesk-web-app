@@ -17,10 +17,18 @@ class UserRoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role_id)
     {
-        if (Auth::check() && Auth::user()->role_id == $role_id) {
-            return $next($request);
+        if (Auth::check()) {
+            // Check if the user has the required role
+            if (Auth::user()->role_id == $role_id) {
+                return $next($request);
+            } else {
+                return response()->json(["error" => "You don't have permission to access this page"]);
+            }
         } else {
-            return redirect()->route('home');
+            // Handle the case where the user is not authenticated
+            return response()->json(["error" => "Unauthorized"]);
         }
+
+
     }
 }

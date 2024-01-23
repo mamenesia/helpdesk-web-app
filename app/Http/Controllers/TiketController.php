@@ -10,6 +10,7 @@ use App\Models\File;
 use App\Models\Reply;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class TiketController extends Controller
 {
@@ -18,6 +19,7 @@ class TiketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
 
     public function index(Request $request)
     {
@@ -60,8 +62,8 @@ class TiketController extends Controller
             }
         }
 
-        if ($request->has('status_filter')) {
-            $status_filter = $request->input('status_filter');
+        if ($request->has('status')) {
+            $status_filter = $request->input('status');
             if ($status_filter != 'all') {
                 $query->whereHas('status', function ($query) use ($status_filter) {
                     $query->where('nama_status', $status_filter);
@@ -201,5 +203,20 @@ class TiketController extends Controller
         } catch (\Exception $e) {
             return ("Gagal menambahkan balasan " . $e->getMessage());
         }
+    }
+
+    public function close($id)
+    {
+        $tiket = Tiket::find($id);
+        if (!$tiket) {
+            return redirect()->back()->with('error', 'Ticket not found');
+        }
+
+        $tiket->status_id = 3;
+        $tiket->closed_by = Auth::user()->id;
+        $tiket->closed_at = now();
+        $tiket->save();
+
+        return redirect()->back()->with('success', 'Ticket closed');
     }
 }

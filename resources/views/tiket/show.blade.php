@@ -30,12 +30,15 @@
                                 <path d="M20.4716 2.42157V8.07843H14.8147" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                        <a href='#'>
-                            <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="24" height="24" fill="white"/>
-                                <path d="M5 13.3636L8.03559 16.3204C8.42388 16.6986 9.04279 16.6986 9.43108 16.3204L19 7" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
+                        <form method="POST" action="{{ route('tiket.close', ['id' => $tiket->id]) }}">
+                            @csrf
+                            <button type="submit">
+                                <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="24" height="24" fill="white"/>
+                                    <path d="M5 13.3636L8.03559 16.3204C8.42388 16.6986 9.04279 16.6986 9.43108 16.3204L19 7" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </form>
                     </div>
                     <div class='flex w-full content-center md:justify-end md:w-1/2'>
                         <a>
@@ -44,17 +47,18 @@
                     </div>
                 </div>
                 <hr class="h-px my-8 bg-gray-200 border-0">
-                <p class="mb-3 text-2xl font-normal text-gray-700">{{$tiket->judul}}</p>
-                <p class="mb-3 text-xl font-normal text-gray-600">{{$tiket->deskripsi}}</p>
-                <p class="mb-3 text-sm font-normal text-gray-500">Pengaju: {{$tiket->pengaju}}</p>
-                <p class="mb-3 text-sm font-normal text-gray-500">Aplikasi: {{$tiket->aplikasi}}</p>
-                <p class="mb-3 text-sm font-normal text-gray-500">Divisi: {{$tiket->divisi->nama_divisi}}</p>
-                <p class="mb-3 text-sm font-normal text-gray-500">Prioritas: {{$tiket->prioritas->nama_prioritas}}</p>
-                <p class="mb-3 text-sm font-normal text-gray-500">Status: {{$tiket->status->nama_status}}</p>
-
+                <div class= 'flex flex-col'>
+                    <a class="mb-3 text-2xl font-normal text-gray-700">{{$tiket->judul}}</a>
+                    <a class="mb-3 text-xl font-normal text-gray-600">{{$tiket->deskripsi}}</a>
+                    <a class="mb-3 text-sm font-normal text-gray-500">Pengaju: {{$tiket->pengaju}}</a>
+                    <a class="mb-3 text-sm font-normal text-gray-500">Aplikasi: {{$tiket->aplikasi}}</a>
+                    <a class="mb-3 text-sm font-normal text-gray-500">Divisi: {{$tiket->divisi->nama_divisi}}</a>
+                    <a class="mb-3 text-sm font-normal text-gray-500">Prioritas: {{$tiket->prioritas->nama_prioritas}}</a>
+                    <a class="mb-3 text-sm font-normal text-gray-500">Status: {{$tiket->status->nama_status}}</a>
+                </div>
             </div>
         </div>
-        <div class='mx-auto container flex flex-wrap items-center min-w-7xl overflow-auto h-[700px]'>
+        <div class='mx-auto container flex flex-wrap items-center min-w-7xl overflow-auto h-[500px] '>
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow divide-y">
                 <div class='pb-4'>
                     <form method="POST" action='{{route('tiket.reply')}}'>
@@ -85,8 +89,9 @@
                             </span>
                             <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex">
                                 <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{$balasan->created_at}}</time>
-                                <div class="text-sm font-normal text-gray-500 ">
-                                    <a class='text-gray-900 font-semibold'> {{$balasan->user->nama}}:</a> {{$balasan->balasan}}
+                                <div class="text-sm font-normal text-gray-500 flex flex-col">
+                                    <a class='text-gray-900 font-semibold pb-2'> {{$balasan->user->nama}}</a> 
+                                    <a>{{$balasan->balasan}}</a>
                                 </div>
                             </div>
                         </li>

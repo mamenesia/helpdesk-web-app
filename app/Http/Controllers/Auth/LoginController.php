@@ -47,9 +47,9 @@ class LoginController extends Controller
         ]);
         if (auth()->attempt(['nipp' => $input['nipp'], 'password' => $input['password']])) {
             if (auth()->user()->role_id == 1) {
-                return redirect()->route('home.admin');
+                return redirect()->route('tiket.daftar');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('welcome');
             }
         } else {
             return redirect()->route('login')->with('error', 'Incorrect username or password');

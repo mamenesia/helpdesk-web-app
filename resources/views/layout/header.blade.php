@@ -11,14 +11,14 @@
             <nav class="bg-white pt-2 pb-4 mt-0 w-full relative">
                 <div class="container mx-auto flex flex-wrap items-center">
                     <div class="flex w-full md:w-1/2 justify-center md:justify-start">
-                        <a href="/">
+                        <a href="{{ route('welcome') }}">
                             <img src="https://i.postimg.cc/d00WBTtr/logo.png" alt="logo" class="h-12 w-auto pt-2">
                         </a>
                     </div>
                     <div class="flex w-full pt-2 content-center md:w-1/2 md:justify-end">
                         <ul class="flex md:flex-none items-center">
                             <li class="mr-3">
-                                <a class="py-2 px-4 text-black no-underline" href="{{url('/')}}">Home</a>
+                                <a class="py-2 px-4 text-black no-underline" href="{{ route('welcome') }}">Home</a>
                             </li>
                             <li class="mr-3 group/item">
                                 <a class="text-black no-underline inline-block py-2 px-4 " href="#">
