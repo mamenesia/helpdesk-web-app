@@ -15,7 +15,7 @@
                             <img src="https://i.postimg.cc/d00WBTtr/logo.png" alt="logo" class="h-12 w-auto pt-2">
                         </a>
                     </div>
-                    <div class="flex w-full pt-2 content-center md:w-1/2 md:justify-end">
+                    <div class="flex w-full pt-2 content-center md:w-1/2 justify-end">
                         <ul class="flex md:flex-none items-center">
                             <li class="mr-3">
                                 <a class="py-2 px-4 text-black no-underline" href="{{ route('welcome') }}">Home</a>

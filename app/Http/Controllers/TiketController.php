@@ -23,7 +23,6 @@ class TiketController extends Controller
 
     public function index(Request $request)
     {
-
         $query = Tiket::orderBy('id', 'asc');
 
         if ($request->has('search_filter') && $request->input('search_filter') != '') {
@@ -116,6 +115,7 @@ class TiketController extends Controller
             'deskripsi' => $request->deskripsi,
             'status_id' => 1,
             'divisi_id' => $request->divisi_id,
+            'user_id' => Auth::user()->id,
         ];
 
         if ($request->hasFile('file')) {

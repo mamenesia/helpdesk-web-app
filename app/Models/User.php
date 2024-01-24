@@ -44,4 +44,8 @@ class User extends Authenticatable
     {
         return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?s=80&d=retro';
     }
+    public function tikets()
+    {
+        return $this->hasMany(Tiket::class, 'user_id');
+    }
 }

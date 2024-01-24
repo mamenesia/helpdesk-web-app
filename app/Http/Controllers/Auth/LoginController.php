@@ -49,14 +49,14 @@ class LoginController extends Controller
             if (auth()->user()->role_id == 1) {
                 return redirect()->route('tiket.daftar');
             } else {
-                return redirect()->route('welcome');
+                return redirect()->route('user.tiketsaya');
             }
         } else {
             return redirect()->route('login')->with('error', 'Incorrect username or password');
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         auth()->logout();
         return redirect()->route('login');
