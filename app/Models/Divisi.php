@@ -19,4 +19,8 @@ class Divisi extends Model
     {
         return $this->hasMany(Tiket::class);
     }
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

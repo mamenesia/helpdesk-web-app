@@ -33,12 +33,12 @@
                             <li class="mr-3 group/item">
                                 <a class="text-black no-underline block py-2 px-4" href="#">Master</a>
                                 <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
-                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="user">Daftar User</a></li>
-                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="divisi">Daftar Divisi</a></li>
+                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="{{route('users.index')}}">Daftar User</a></li>
+                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="{{route('divisi.index')}}">Daftar Divisi</a></li>
                                 </ul>
                             </li>
                             <li class="mr-3">
-                                <a class="inline-block py-2 px-4 text-black no-underline" href="#">Submission</a>
+                                <a class="inline-block py-2 px-4 text-black no-underline" href="{{route("user.submission")}}">Submission</a>
                             </li>
 
                             @if (Auth::check())
@@ -47,7 +47,6 @@
                                     <span>{{ Auth::user()->nama }}</span>
                                 </a>
                                 <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
-                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="#">Profile</a></li>
                                     <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="#"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

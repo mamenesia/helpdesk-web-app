@@ -68,7 +68,7 @@
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <div class="flex items-center">
-                                                <a href='{{ route('user.show', ['tiket' => $item->id])}}' class="text-gray-900 whitespace-no-wrap hover:underline">
+                                                <a href='{{ route('user.tampilkan', ['id' => $item->id])}}' class="text-gray-900 whitespace-no-wrap hover:underline">
                                                     {{$item->judul}}
                                                 </a>
                                             </div>

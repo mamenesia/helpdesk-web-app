@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tiket::class, 'user_id');
     }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisi_id');
+    }
 }

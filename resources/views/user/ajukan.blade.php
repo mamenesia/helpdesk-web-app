@@ -19,21 +19,21 @@
                 <div class="col-span-full">
                     <label for="judul" class="block text-sm font-medium leading-6 text-gray-900">Judul:</label>
                     <div class="mt-2">
-                        <input type="text" name="judul" value="{{ Session::get('judul')}}" id="judul" autocomplete="judul" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input type="text" name="judul" value="{{ Session::get('judul')}}" id="judul" autocomplete="judul" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
                 <div class="col-span-full">
                     <label for="pengaju" class="block text-sm font-medium leading-6 text-gray-900">Pengaju:</label>
                     <div class="mt-2">
-                        <input type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
                 <div class="col-span-full">
                     <label for="aplikasi" class="block text-sm font-medium leading-6 text-gray-900">Aplikasi:</label>
                     <div class="mt-2">
-                        <select id="aplikasi" name="aplikasi" autocomplete="aplikasi" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                        <select id="aplikasi" name="aplikasi" autocomplete="aplikasi" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6">
                             <option>Simop Kapal</option>
                             <option>FS</option>
                             <option>Sampah Kapal</option>
@@ -45,9 +45,20 @@
                 </div>
 
                 <div class="sm:col-span-3">
+                    <label for="prioritas" class="block text-sm font-medium leading-6 text-gray-900">Prioritas:</label>
+                    <div class="mt-2">
+                        <select id="prioritas_id" name="prioritas_id" autocomplete="prioritas_id" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                            @foreach ($prioritasOptions as $option)
+                            <option value="{{$option->id}}">{{$option->nama_prioritas}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
                     <label for="divisi" class="block text-sm font-medium leading-6 text-gray-900">Divisi:</label>
                     <div class="mt-2">
-                        <select id="divisi_id" name="divisi_id" autocomplete="divisi_id" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                        <select id="divisi_id" name="divisi_id" autocomplete="divisi_id" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6">
                             @foreach ($divisiOptions as $option)
                             <option value="{{$option->id}}">{{$option->nama_divisi}}</option>
                             @endforeach
@@ -58,7 +69,7 @@
                 <div class="col-span-full">
                     <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Deskripsi:</label>
                     <div class="mt-2">
-                        <textarea id="deskripsi" name="deskripsi" value="{{ Session::get('deskripsi')}}" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                        <textarea id="deskripsi" name="deskripsi" value="{{ Session::get('deskripsi')}}" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
                     </div>
                     <p class="mt-3 text-sm leading-6 text-gray-600">Tulis deskripsi untuk tiket yang akan diaju.</p>
                 </div>
@@ -71,7 +82,7 @@
                                 <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
                             </svg>
                             <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                <label for="file" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                <label for="file" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500">
                                     <span>Upload a file</span>
                                     <input id="file" name="file" type="file" class=''>
                                 </label>

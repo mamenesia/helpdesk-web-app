@@ -44,23 +44,51 @@
                         <a>
                             <h5 class="mb-2 text-2xl font-bold text-end tracking-tight text-gray-900">Tiket #{{$tiket->id}}</h5>
                         </a>
+                        <a class='px-2 pt-1'>
+                            @if ($tiket->status->nama_status === 'Open')
+                                <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
+                                    <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">{{$tiket->status->nama_status}}</span>
+                                </span>
+                            @elseif ($tiket->status->nama_status === 'Pending')
+                                <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
+                                    <span aria-hidden class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">{{$tiket->status->nama_status}}</span>
+                                </span>
+                            @elseif ($tiket->status->nama_status === 'Closed')
+                                <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
+                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">{{$tiket->status->nama_status}}</span>
+                                </span>
+                            @endif
+                        </a>
                     </div>
                 </div>
                 <hr class="h-px my-8 bg-gray-200 border-0">
                 <div class= 'flex flex-col'>
                     <div class= 'flex flex-wrap justify-between'>
                         <a class="mb-3 text-3xl font-normal text-gray-900">{{$tiket->judul}}</a>
-                        @if ($tiket->prioritas)
-                            <a class="text-gray-900 whitespace-no-wrap font-semibold text-end">{{$tiket->prioritas->nama_prioritas}}</a>
-                        @else
-                            <a class="text-gray-900 font-semibold whitespace-no-wrap text-end">Not Set</a>
-                        @endif
+                        <div class="mt-0">
+                            <form method="POST" action="{{ route('tiket.updatePrioritas', ['tiket' => $tiket->id]) }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex items-center">
+                                    <select id="prioritas" name="prioritas" autocomplete="prioritas" class="block w-full rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                        <option value="1" @if($tiket->prioritas_id == 1) selected @endif>Rendah</option>
+                                        <option value="2" @if($tiket->prioritas_id == 2) selected @endif>Sedang</option>
+                                        <option value="3" @if($tiket->prioritas_id == 3) selected @endif>Tinggi</option>
+                                    </select>
+                                    <button type="submit" class="ml-2 inline-flex items-center px-4 py-2  text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <a class="mb-3 text-xl font-normal text-gray-600">{{$tiket->deskripsi}}</a>
                     <a class="mb-3 text-sm font-normal text-gray-500">Pengaju: {{$tiket->pengaju}}</a>
                     <a class="mb-3 text-sm font-normal text-gray-500">Aplikasi: {{$tiket->aplikasi}}</a>
                     <a class="mb-3 text-sm font-normal text-gray-500">Divisi: {{$tiket->divisi->nama_divisi}}</a>
-                    <a class="mb-3 text-sm font-normal text-gray-500">Status: {{$tiket->status->nama_status}}</a>
                 </div>
             </div>
         </div>
@@ -114,6 +142,7 @@
             });
             src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"
         </script>
+        
     </body>
 </html>
 @endsection

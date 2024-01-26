@@ -58,7 +58,7 @@
         <div class='mx-auto container flex flex-wrap items-center min-w-7xl overflow-auto h-[500px] '>
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow divide-y">
                 <div class='pb-4'>
-                    <form method="POST" action='{{route('tiket.reply')}}'>
+                    <form method="POST" action='{{route('user.reply')}}'>
                         @csrf
                         <input type="hidden" id="tiket_id" name="tiket_id" value="{{ $tiket->id }}">
                         <input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}">

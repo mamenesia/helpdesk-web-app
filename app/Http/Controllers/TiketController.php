@@ -219,4 +219,14 @@ class TiketController extends Controller
 
         return redirect()->back()->with('success', 'Ticket closed');
     }
+    public function updatePrioritas(Request $request, Tiket $tiket)
+    {
+        $validatedData = $request->validate([
+            'prioritas' => 'required|integer',
+        ]);
+
+        $tiket->update(['prioritas_id' => $validatedData['prioritas']]);
+
+        return redirect()->back()->with('success', 'Prioritas updated successfully');
+    }
 }
