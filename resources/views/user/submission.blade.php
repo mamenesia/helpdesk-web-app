@@ -19,14 +19,14 @@
                 <div class="col-span-full">
                     <label for="nomor_ppkb" class="block text-sm font-medium leading-6 text-gray-900">Nomor PPKB:</label>
                     <div class="mt-2">
-                        <input type="text" name="nomor_ppkb" value="{{ Session::get('nomor_ppkb')}}" id="nomor_ppkb" autocomplete="nomor_ppkb" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="nomor_ppkb" value="{{ Session::get('nomor_ppkb')}}" id="nomor_ppkb" autocomplete="nomor_ppkb" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
                 <div class="col-span-full">
                     <label for="ppkb_ke" class="block text-sm font-medium leading-6 text-gray-900">PPKB Ke:</label>
                     <div class="mt-2">
-                        <input type="text" name="ppkb_ke" value="{{ Session::get('ppkb_ke')}}" id="ppkb_ke" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="ppkb_ke" value="{{ Session::get('ppkb_ke')}}" id="ppkb_ke" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
@@ -46,14 +46,14 @@
                 <div class="sm:col-span-3">
                     <label for="nama_kapal" class="block text-sm font-medium leading-6 text-gray-900">Nama Kapal:</label>
                     <div class="mt-2">
-                        <input type="text" name="nama_kapal" value="{{ Session::get('nama_kapal')}}" id="nama_kapal" autocomplete="nama_kapal" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="nama_kapal" value="{{ Session::get('nama_kapal')}}" id="nama_kapal" autocomplete="nama_kapal" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
                 <div class="sm:col-span-3">
                     <label for="divisi" class="block text-sm font-medium leading-6 text-gray-900">Keagenan:</label>
                     <div class="mt-2">
-                        <input type="text" name="keagenan" value="{{ Session::get('keagenan')}}" id="keagenan" autocomplete="keagenan" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="keagenan" value="{{ Session::get('keagenan')}}" id="keagenan" autocomplete="keagenan" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 

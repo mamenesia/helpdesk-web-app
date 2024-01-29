@@ -13,20 +13,20 @@
     </head>
     <body>
         <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Pengajuan Topik</h1>
-        <form action='{{route('user.store')}}' method='POST'>
+        <form action='{{route('user.store')}}' method='POST' enctype="multipart/form-data">
             @csrf
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 px-60 pb-10">
                 <div class="col-span-full">
                     <label for="judul" class="block text-sm font-medium leading-6 text-gray-900">Judul:</label>
                     <div class="mt-2">
-                        <input type="text" name="judul" value="{{ Session::get('judul')}}" id="judul" autocomplete="judul" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="judul" value="{{ Session::get('judul')}}" id="judul" autocomplete="judul" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
                 <div class="col-span-full">
                     <label for="pengaju" class="block text-sm font-medium leading-6 text-gray-900">Pengaju:</label>
                     <div class="mt-2">
-                        <input type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@
                 <div class="col-span-full">
                     <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Deskripsi:</label>
                     <div class="mt-2">
-                        <textarea id="deskripsi" name="deskripsi" value="{{ Session::get('deskripsi')}}" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
+                        <textarea required id="deskripsi" name="deskripsi" value="{{ Session::get('deskripsi')}}" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
                     </div>
                     <p class="mt-3 text-sm leading-6 text-gray-600">Tulis deskripsi untuk tiket yang akan diaju.</p>
                 </div>
@@ -84,11 +84,9 @@
                             <div class="mt-4 flex text-sm leading-6 text-gray-600">
                                 <label for="file" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500">
                                     <span>Upload a file</span>
-                                    <input id="file" name="file" type="file" class=''>
+                                    <input id="formFile" name="formFile" type="file" class='form-control'>
                                 </label>
-                                <p class="pl-1">or drag and drop</p>
                             </div>
-                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+
 @extends("layouts.app")
 
 @section("title","My Tickets")
@@ -82,7 +83,7 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->created_at}}</p>
+                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->created_at->format('Y-m-d')}}</p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             @if ($item->prioritas)

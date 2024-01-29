@@ -37,8 +37,11 @@
                                     <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="{{route('divisi.index')}}">Daftar Divisi</a></li>
                                 </ul>
                             </li>
-                            <li class="mr-3">
-                                <a class="inline-block py-2 px-4 text-black no-underline" href="{{route("user.submission")}}">Submission</a>
+                            <li class="mr-3 group/item">
+                                <a class="inline-block py-2 px-4 text-black no-underline" href="#">Submission</a>
+                                <ul class='group/edit group-hover/item:visible absolute invisible shadow-lg'>
+                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="{{route('user.daftarsubmission')}}">Daftar Submission</a></li>
+                                </ul>
                             </li>
 
                             @if (Auth::check())

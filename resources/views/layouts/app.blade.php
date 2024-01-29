@@ -18,8 +18,17 @@
                     <div class='flex w-full pt-2 content-center md:w-1/2 justify-end'>
                         <!-- Right Side Of Navbar -->
                         <ul class="flex md:flex-none items-end">
-                            <!-- Authentication Links -->
                             @if (Auth::check())
+                            <li class="mr-3 group/item">
+                                <a class="inline-block py-2 px-4 text-black no-underline">Submission</a>
+                                <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
+                                    <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="{{route("user.submission")}}">Ajukan Submission</a></li>
+                                    <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="{{route('user.daftarsubmission')}}">Daftar Submission</a></li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Authentication Links -->
+
                                 <li class="mr-3 group/item">
                                     <a class="text-black no-underline inline-block py-2 px-4 " href="#">
                                         <span>{{ Auth::user()->nama }}</span>

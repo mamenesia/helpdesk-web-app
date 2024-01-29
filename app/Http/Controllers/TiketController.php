@@ -197,6 +197,12 @@ class TiketController extends Controller
             'balasan' => $request->balasan,
         ];
 
+        $tiket = Tiket::find($request->tiket_id);
+        if ($tiket->status_id == 1) {
+            $tiket->status_id = 2;
+            $tiket->save();
+        }
+
         try {
             Reply::create($data);
             return redirect()->route('tiket.show', $request->tiket_id)->with('success', 'Balasan berhasil ditambahkan');

@@ -1,25 +1,17 @@
-@extends("layout.layout")
+@extends(Auth::user()->role_id == 1 ? 'layout.layout' : 'layouts.app')
 
-@section("title","Daftar Topik")
+@section("title","Daftar Submission")
 
 @section("content")
-<!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='initial-scale=1'>
-        <title>@yield('title')</title>
-        @vite('resources/css/app.css', 'resources/js/app.js')
-    </head>
     <!-- component -->
-        <body class="antialiased font-sans">
+
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="py-8">
                     <div>
-                        <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Daftar Topik</h1>
-                    </div>
+                        <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Daftar Submission</h1>
+                    </div> 
                     <div class='flex'>
-                        <a href='{{route('tiket.ajukan')}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-bold rounded-lg px-5 py-2 mb-2 bg-stone-200 hover:bg-stone-300">+</a>
+                        <a href='{{route('user.submission')}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-bold rounded-lg px-5 py-2 mb-2 bg-stone-200 hover:bg-stone-300">+</a>
                         <!-- drawer init and show -->
                         <div class="px-2">
                             <button class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-3 focus:ring-blue-300 font-bold rounded-lg text-sm px-8 py-2.5 mb-2 " type="button" data-drawer-target="drawer-form" data-drawer-show="drawer-form" aria-controls="drawer-form">
@@ -56,15 +48,6 @@
                                         <option value="closed">Closed</option>
                                     </select>
                                 </div>
-                                <div class='mb-6'>
-                                    <label for='prioritas' class='block mb-2 text-sm font-medium text-gray-900 '>Prioritas</label>
-                                    <select id='prioritas' name='prioritas' class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
-                                        <option value='all'>All</option>
-                                        <option value='rendah'>Rendah</option>
-                                        <option value='sedang'>Sedang</option>
-                                        <option value='tinggi'>Tinggi</option>
-                                    </select>
-                                </div>
                                 
                                 <button type="submit" class=" text-white justify-center flex items-center bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">
                                     Filter
@@ -84,87 +67,86 @@
                                         </th>
                                         <th
                                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Judul
+                                            No PPKB
                                         </th>
                                         <th
                                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Pengaju
+                                            PPKB Ke
                                         </th>
                                         <th
                                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Aplikasi
+                                            Service Code
                                         </th>
                                         <th
                                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Tanggal Dibuat
+                                            Nama Kapal
                                         </th>
                                         <th
                                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Prioritas
+                                            Keagenan
                                         </th>
                                         <th
                                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             Status
                                         </th>
+                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            Tanggal Dibuat
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = $data->firstItem() ?>
-                                    @foreach ($data as $item)
+                                    <?php $i = $submission->firstItem() ?>
+                                    @foreach ($submission as $item)
                                     <tr>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-gray-900 whitespace-no-wrap">{{$item->id}}</p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <div class="flex items-center">
-                                                <a href='{{ route('tiket.show', ['tiket' => $item->id])}}' class="text-gray-900 whitespace-no-wrap hover:underline">
-                                                    {{$item->judul}}
-                                                </a>
+                                                <form method="POST" action="{{ route('submission.update', ['id' => $item->id]) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="status" value="Progress">
+                                                    <button type="submit" class="text-gray-900 whitespace-no-wrap hover:underline">
+                                                        {{$item->nomor_ppkb}}
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->pengaju}}</p>
+                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->ppkb_ke}}</p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-gray-900 whitespace-no-wrap">
-                                                {{$item->aplikasi}}
+                                                {{$item->service_code}}
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->created_at->format('Y-m-d')}}</p>
+                                            <p class='text-gray-900 whitespace-no-wrap'>{{$item->nama_kapal}}</p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                             @if ($item->prioritas)
-                                                @if ($item->prioritas->nama_prioritas === 'Rendah')
-                                                    <p class="text-green-700 whitespace-no-wrap">{{$item->prioritas->nama_prioritas}}</p>
-                                                @elseif ($item->prioritas->nama_prioritas === 'Sedang')
-                                                    <p class="text-yellow-400 whitespace-no-wrap">{{$item->prioritas->nama_prioritas}}</p>
-                                                @elseif ($item->prioritas->nama_prioritas === 'Tinggi')
-                                                    <p class="text-red-700 whitespace-no-wrap">{{$item->prioritas->nama_prioritas}}</p>
-                                                @elseif ($item->prioritas->nama_prioritas === 'Not Set')
-                                                    <p class="text-gray-700 whitespace-no-wrap">{{$item->prioritas->nama_prioritas}}</p>
-                                                @endif
-                                            @else
-                                                <p class="text-gray-900 font-semibold whitespace-no-wrap">Not Set</p>
-                                            @endif
+                                            <p class='text-gray-900 whitespace-no-wrap'>{{$item->keagenan}}</p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            @if ($item->nama_status === 'Open')
+                                            @if ($item->status === 'New')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">{{$item->nama_status}}</span>
+                                                    <span class="relative">{{$item->status}}</span>
                                                 </span>
-                                            @elseif ($item->nama_status === 'Pending')
+                                            @elseif ($item->status === 'Progress')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">{{$item->nama_status}}</span>
+                                                    <span class="relative">{{$item->status}}</span>
                                                 </span>
-                                            @elseif ($item->nama_status === 'Closed')
+                                            @elseif ($item->status === 'Done')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">{{$item->nama_status}}</span>
+                                                    <span class="relative">{{$item->status}}</span>
                                                 </span>
                                             @endif
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->created_at->format('Y-m-d')}}</p>
                                         </td>
                                     </tr>
                                     <?php $i++ ?>
@@ -172,13 +154,12 @@
                                 </tbody>
                             </table>
                             <div class="px-5 py-5 bg-white border-t flex flex-col items-center">
-                                {{ $data->withQueryString()->links()}}
+                                {{ $submission->withQueryString()->links()}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-        </body>
-
+       
 @endsection
