@@ -55,6 +55,7 @@ Route::middleware(['auth', 'user-role:1'])->group(function () {
     Route::get('/tiket/{tiket}', [TiketController::class, 'show'])->name('tiket.show');
     Route::post('/tiket/reply', [TiketController::class, 'reply'])->name('tiket.reply');
     Route::post('/attach-roles', [UsersController::class, 'updateRole'])->name('attach.roles');
+    Route::get('/admin/daftar/submission/', [SubmissionController::class, 'daftarsubmissionAdmin'])->name('admin.daftarsubmission');
 });
 
 Route::middleware(['auth', 'user-role:3'])->group(function () {

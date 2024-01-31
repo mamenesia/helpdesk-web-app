@@ -12,6 +12,6 @@ class DivisiController extends Controller
     {
         $divisi = Divisi::orderBy('id', 'asc')->paginate(10);
 
-        return view('divisi', compact('divisi'));
+        return view('admin.divisi', compact('divisi'));
     }
 }

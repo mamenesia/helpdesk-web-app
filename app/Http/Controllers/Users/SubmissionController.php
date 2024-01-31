@@ -93,4 +93,9 @@ class SubmissionController extends Controller
 
         return view('user.tampilkansubmission', compact('submission'));
     }
+    public function daftarsubmissionAdmin()
+    {
+        $submission = Submission::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.daftarSubmission', compact('submission'));
+    }
 }
