@@ -1,4 +1,4 @@
-@extends("layout.layout")
+@extends(Auth::user()->roles->contains('id',1 ) ? 'layout.layout' : 'layouts.app')
 
 @section("title","Daftar User")
 
@@ -42,24 +42,28 @@
                     </div>
                     <div class="-mx-8 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                            <table class="min-w-full leading-normal content-center">
-                                <thead>
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs text-gray-800 uppercase bg-blue-50">
                                     <tr>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Nama
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             NIPP
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Divisi
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Nomor Handphone
+                                        </th>
+                                        <th
+                                            scope="col" class="px-5 py-3" scope="col"> 
+                                            Keterangan
                                         </th>
                                     </tr>
                                 </thead>
@@ -78,6 +82,26 @@
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-gray-900 whitespace-no-wrap">{{$item->nomor_hp}}</p>
+                                        </td>
+                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <form action="{{ route('attach.roles') }}" method="POST">
+                                                @csrf
+                                                <div>
+                                                    <label for="user"></label>
+                                                    <input name="user_id" class="sr-only" value="{{ $item->id }}">
+                                                </div>
+                                                <div>
+                                                    <label for="roles"></label>
+                                                    @foreach($roles as $role)
+                                                        <div>
+                                                            <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" type="checkbox" id="default-checkbox" name="role_ids[]" value="{{ $role->id }}"
+                                                                {{ $item->roles->contains('id', $role->id) ? 'checked' : ''}}>
+                                                            <label class="pl-1" for="role{{ $role->id }}">{{ $role->name }}</label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <button class="text-blue-500 hover:text-white border border-blue-500 hover:bg-blue-600 focus:ring-3 focus:outline-none focus:ring-blue-100 font-medium rounded-lg text-sm px-3 py-2 text-center  mt-2" type="submit">Attach Roles</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     <?php $i++ ?>

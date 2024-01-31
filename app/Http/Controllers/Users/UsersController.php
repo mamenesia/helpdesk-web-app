@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Divisi;
+use App\Models\Role;
 
 class UsersController extends Controller
 {
@@ -27,8 +27,17 @@ class UsersController extends Controller
         }
 
         $users = $query->paginate(10);
+        $roles = Role::all();
 
-        return view('user', compact('users'));
+        return view('admin.user', compact('users', 'roles'));
     }
+    public function updateRole(Request $request)
+    {
+        $user = User::find($request->user_id);
+        $roles = $request->role_ids;
 
+        $user->roles()->sync($roles);
+
+        return redirect()->back()->with('success', 'Roles attached successfully');
+    }
 }

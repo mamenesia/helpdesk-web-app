@@ -33,5 +33,9 @@ class File extends Model
         }
         return null;
     }
+    public function tiket()
+    {
+        return $this->hasOne(Tiket::class);
+    }
     public $timestamps = true;
 }

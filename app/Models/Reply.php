@@ -13,7 +13,9 @@ class Reply extends Model
         'tiket_id',
         'user_id',
         'balasan',
+        'file_id'
     ];
+
     public function tiket()
     {
         return $this->belongsTo(Tiket::class, 'tiket_id');
@@ -22,5 +24,8 @@ class Reply extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
+    public function files()
+    {
+        return $this->belongsTo(File::class, 'file_id');
+    }
 }

@@ -18,7 +18,7 @@
                     <div class="flex w-full pt-2 content-center md:w-1/2 justify-end">
                         <ul class="flex md:flex-none items-center">
                             <li class="mr-3">
-                                <a class="py-2 px-4 text-black no-underline" href="{{ route('welcome') }}">Home</a>
+                                <a class="py-2 px-4 text-black no-underline" href="/">Home</a>
                             </li>
                             <li class="mr-3 group/item">
                                 <a class="text-black no-underline inline-block py-2 px-4 " href="#">

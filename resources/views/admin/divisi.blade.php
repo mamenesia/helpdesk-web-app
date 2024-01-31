@@ -1,4 +1,4 @@
-@extends("layout.layout")
+@extends(Auth::user()->roles->contains('id',1 ) ? 'layout.layout' : 'layouts.app')
 
 @section("title","Daftar Divisi")
 

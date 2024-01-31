@@ -10,7 +10,6 @@ use App\Models\Tiket;
 use Illuminate\Support\Facades\Session;
 use App\Models\Prioritas;
 use App\Models\Reply;
-use App\Models\Submission;
 use App\Models\File;
 use Illuminate\Support\Str;
 
@@ -58,12 +57,12 @@ class TiketsController extends Controller
             $serverName = $file->hashName();
             $size = $file->getSize();
             $mime = $file->getMimeType();
-            $path = $file->store('uploads');
+            $path = $file->store('public/uploads');
             $extension = $file->getClientOriginalExtension();
-            $disk = 'local'; // or whatever disk you're using
+            $disk = 'local';
 
             // Store the file information in the database
-            File::create([
+            $fileData = [
                 'uuid' => (string) Str::uuid(),
                 'nama_file' => $originalName,
                 'nama_server' => $serverName,
@@ -73,7 +72,9 @@ class TiketsController extends Controller
                 'extension' => $extension,
                 'disk' => $disk,
                 'user_id' => Auth::user()->id,
-            ]);
+            ];
+            $fileRecord = File::create($fileData);
+            $data['file_id'] = $fileRecord->id;
         }
 
         try {
@@ -83,9 +84,10 @@ class TiketsController extends Controller
             return ("Gagal menambahkan tiket " . $e->getMessage());
         }
     }
+
     public function tampilkan($id)
     {
-        $tiket = Tiket::with('prioritas', 'status', 'user', 'balasan')->find($id);
+        $tiket = Tiket::with('prioritas', 'status', 'user', 'balasan', 'files')->find($id);
 
         if (!$tiket) {
             return redirect()->back()->with('error', 'Ticket not found');
@@ -101,83 +103,39 @@ class TiketsController extends Controller
             'balasan' => $request->balasan,
         ];
 
+        if ($request->hasFile('fileInput')) {
+            $file = $request->file('fileInput');
+            $originalName = $file->getClientOriginalName();
+            $serverName = $file->hashName();
+            $size = $file->getSize();
+            $mime = $file->getMimeType();
+            $path = $file->store('public/uploads');
+            $extension = $file->getClientOriginalExtension();
+            $disk = 'local';
+
+            // Store the file information in the database
+
+            $fileData = [
+                'uuid' => (string) Str::uuid(),
+                'nama_file' => $originalName,
+                'nama_server' => $serverName,
+                'size' => $size,
+                'mime' => $mime,
+                'path' => $path,
+                'extension' => $extension,
+                'disk' => $disk,
+                'user_id' => Auth::user()->id,
+            ];
+
+            $fileRecord = File::create($fileData);
+            $data['file_id'] = $fileRecord->id;
+
+        }
         try {
             Reply::create($data);
             return redirect()->route('user.tampilkan', $request->tiket_id)->with('success', 'Balasan berhasil ditambahkan');
         } catch (\Exception $e) {
             return ("Gagal menambahkan balasan " . $e->getMessage());
         }
-    }
-    public function createppkb()
-    {
-        return view('user.submission');
-
-    }
-    public function storeppkb(Request $request)
-    {
-        Session::flash('nomor_ppkb', $request->nomor_ppkb);
-        Session::flash('ppkb_ke', $request->ppkb_ke);
-        Session::flash('service_code', $request->service_code);
-        Session::flash('nama_kapal', $request->nama_kapal);
-        Session::flash('keagenan', $request->keagenan);
-        Session::flash('status', $request->status);
-
-        $data = [
-            'nomor_ppkb' => $request->nomor_ppkb,
-            'ppkb_ke' => $request->ppkb_ke,
-            'service_code' => $request->service_code,
-            'nama_kapal' => $request->nama_kapal,
-            'keagenan' => $request->keagenan,
-            'status' => 'New',
-            'user_id' => Auth::user()->id,
-        ];
-
-        try {
-            Submission::create($data);
-            return redirect()->route('user.daftarsubmission')->with('success', 'Submission berhasil ditambahkan');
-        } catch (\Exception $e) {
-            return ("Gagal menambahkan tiket " . $e->getMessage());
-        }
-
-    }
-    public function daftarsubmission()
-    {
-        $submission = Submission::orderBy('created_at', 'desc')->paginate(10);
-        return view('user.daftarSubmission', compact('submission'));
-    }
-    public function tampilkansubmission($id)
-    {
-        $submission = Submission::find($id);
-
-        if (!$submission) {
-            return redirect()->back()->with('error', 'Submission not found');
-        }
-
-        return view('user.tampilkansubmission', compact('submission'));
-    }
-    public function updatesubmission(Request $request, $id)
-    {
-        $submission = Submission::findOrFail($id);
-        if ($submission->status == "New") {
-            $submission->status = $request->status;
-            $submission->save();
-        }
-
-        return redirect()->route('user.tampilkansubmission', ['id' => $submission->id])->with('success', 'Submission berhasil diupdate');
-    }
-
-    public function selesai($id)
-    {
-        $submission = Submission::find($id);
-        if (!$submission) {
-            return redirect()->back()->with('error', 'Ticket not found');
-        }
-
-        $submission->status = "Done";
-        $submission->closed_by = Auth::user()->id;
-        $submission->closed_at = now();
-        $submission->save();
-
-        return redirect()->back()->with('success', 'Ticket closed');
     }
 }

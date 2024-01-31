@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends(Auth::user()->roles->contains('id',1 ) ? 'layout.layout' : 'layouts.app')
 
 @section("title","Ajukan Topik")
 
@@ -15,7 +15,7 @@
         <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Pengajuan Topik</h1>
         <form action='{{route('user.store')}}' method='POST' enctype="multipart/form-data">
             @csrf
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 px-60 pb-10">
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 px-60 pb-10 min-w-7xl">
                 <div class="col-span-full">
                     <label for="judul" class="block text-sm font-medium leading-6 text-gray-900">Judul:</label>
                     <div class="mt-2">
@@ -26,7 +26,7 @@
                 <div class="col-span-full">
                     <label for="pengaju" class="block text-sm font-medium leading-6 text-gray-900">Pengaju:</label>
                     <div class="mt-2">
-                        <input required type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="pengaju" value="{{Auth::user()->nama}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
@@ -82,14 +82,15 @@
                                 <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
                             </svg>
                             <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                <label for="file" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500">
-                                    <span>Upload a file</span>
+                                <label for="formFile" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500">
+                                    
                                     <input id="formFile" name="formFile" type="file" class='form-control'>
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div>
                     <button type='submit' name='submit' class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mt-5">Ajukan</button>
                 </div>

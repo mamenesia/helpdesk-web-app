@@ -19,7 +19,8 @@ class Tiket extends Model
         'prioritas_id',
         'divisi_id',
         'user_id',
-        'status_id'
+        'status_id',
+        'file_id'
     ];
 
     public function user()
@@ -44,9 +45,10 @@ class Tiket extends Model
     {
         return $this->hasMany(Reply::class, 'tiket_id');
     }
-    public function file()
+    public function files()
     {
-        return $this->hasMany(File::class, 'tiket_id');
+        return $this->belongsTo(File::class, 'file_id');
     }
+
     public $timestamps = true;
 }

@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends(Auth::user()->roles->contains('id',1 ) ? 'layout.layout' : 'layouts.app')
 
 @section("title","Ajukan PPKB")
 

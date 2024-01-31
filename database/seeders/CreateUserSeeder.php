@@ -17,24 +17,12 @@ class CreateUserSeeder extends Seeder
     {
         $users = [
             [
-                'nama' => 'Admin',
-                'nipp' => 'admin',
-                'password' => bcrypt('admin'),
+                'nama' => 'Iqbal Maulana',
+                'nipp' => 'iqbal',
+                'password' => bcrypt('iqbal'),
                 'divisi_id' => 1,
-                'role_id' => 1,
                 'status' => true,
-                'nomor_hp' => '081234567890',
-                'avatar' => 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=80&d=retro'
-
-            ],
-            [
-                'nama' => 'User',
-                'nipp' => 'user',
-                'password' => bcrypt('user'),
-                'divisi_id' => 1,
-                'role_id' => 0,
-                'status' => true,
-                'nomor_hp' => '081234567890',
+                'nomor_hp' => '087884550875',
                 'avatar' => 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=80&d=retro'
             ]
         ];

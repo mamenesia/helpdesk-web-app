@@ -46,7 +46,7 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         if (auth()->attempt(['nipp' => $input['nipp'], 'password' => $input['password']])) {
-            if (auth()->user()->role_id == 1) {
+            if (auth()->user()->roles->contains('id', 1)) {
                 return redirect()->route('tiket.daftar');
             } else {
                 return redirect()->route('user.tiketsaya');

@@ -10,4 +10,10 @@ module.exports = {
         extend: {},
     },
     plugins: [require("@tailwindcss/forms", "flowbite/plugin")],
+    variants: {
+        extend: {
+            backgroundColor: ["hover"],
+            textColor: ["active"],
+        },
+    },
 };

@@ -11,6 +11,8 @@ use App\Models\Reply;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Role;
 
 class TiketController extends Controller
 {
@@ -23,7 +25,7 @@ class TiketController extends Controller
 
     public function index(Request $request)
     {
-        $query = Tiket::orderBy('id', 'asc');
+        $query = Tiket::orderBy('id', 'desc');
 
         if ($request->has('search_filter') && $request->input('search_filter') != '') {
             $search_filter = $request->input('search_filter');
@@ -120,55 +122,30 @@ class TiketController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $location = public_path('files/' . $filename);
-            $file->move($location);
+            $originalName = $file->getClientOriginalName();
+            $serverName = $file->hashName();
+            $size = $file->getSize();
+            $mime = $file->getMimeType();
+            $path = $file->store('public/uploads');
+            $extension = $file->getClientOriginalExtension();
+            $disk = 'local';
+
+            // Store the file information in the database
 
             $fileData = [
-                'uuid' => Str::uuid(),
-                'nama_file' => $filename,
-                'nama_server' => md5($file->getRealPath()) . '.' . $file->getClientOriginalExtension(),
-                'size' => $file->getSize(),
-                'mime' => $file->getMimeType(),
-                'path' => $location,
-                'extension' => Str::lower($file->getClientOriginalExtension()),
-                'disk' => 'public',
-                'user_id' => '1', // assuming the user is authenticated
+                'uuid' => (string) Str::uuid(),
+                'nama_file' => $originalName,
+                'nama_server' => $serverName,
+                'size' => $size,
+                'mime' => $mime,
+                'path' => $path,
+                'extension' => $extension,
+                'disk' => $disk,
+                'user_id' => Auth::user()->id,
             ];
-            File::create($fileData);
+            $fileRecord = File::create($fileData);
+            $data['file_id'] = $fileRecord->id;
         }
-
-        // if ($request->hasFile('file')) {
-        //     $file = $request->file('file');
-        //     $nama_file = $file->getClientOriginalName();
-
-        //     $photo = new File();
-        //     $photo->uuid = Str::uuid();
-        //     $photo->nama_file = $nama_file;
-        //     $photo->nama_server = md5($file->getRealPath() . time()) . '.' . $file->getClientOriginalExtension();
-        //     $photo->size = $file->getSize();
-        //     $photo->mime = $file->getMimeType();
-        //     $photo->path = date('Y') . '/' . date('m');
-        //     $photo->extension = Str::lower($file->getClientOriginalExtension());
-        //     $photo->disk = 'public';
-        //     $photo->user_id = '1'; // assuming the user is authenticated
-        //     $photo->save();
-        // }
-
-        // $fileData = [
-        //     'uuid' => Str::uuid(),
-        //     'nama_file' => $file->getClientOriginalName(),
-        //     'nama_server' => md5($file->getRealPath()) . '.' . $file->getClientOriginalExtension(),
-        //     'size' => $file->getSize(),
-        //     'mime' => $file->getMimeType(),
-        //     'path' => date('Y') . '/' . date('m'),
-        //     'extension' => $file->getClientOriginalExtension(),
-        //     'disk' => 'public',
-        //     'user_id' => '1', // assuming the user is authenticated
-        // ];
-
-        // // Create the file record in the files table
-        // File::create($fileData);
 
         try {
             Tiket::create($data);
@@ -180,7 +157,7 @@ class TiketController extends Controller
 
     public function show($id)
     {
-        $tiket = Tiket::with('prioritas', 'status', 'user', 'balasan')->find($id);
+        $tiket = Tiket::with('prioritas', 'status', 'user', 'balasan', 'files')->find($id);
 
         if (!$tiket) {
             return redirect()->back()->with('error', 'Ticket not found');
@@ -201,6 +178,33 @@ class TiketController extends Controller
         if ($tiket->status_id == 1) {
             $tiket->status_id = 2;
             $tiket->save();
+        }
+
+        if ($request->hasFile('fileInput')) {
+            $file = $request->file('fileInput');
+            $originalName = $file->getClientOriginalName();
+            $serverName = $file->hashName();
+            $size = $file->getSize();
+            $mime = $file->getMimeType();
+            $path = $file->store('public/uploads');
+            $extension = $file->getClientOriginalExtension();
+            $disk = 'local';
+
+            // Store the file information in the database
+
+            $fileData = [
+                'uuid' => (string) Str::uuid(),
+                'nama_file' => $originalName,
+                'nama_server' => $serverName,
+                'size' => $size,
+                'mime' => $mime,
+                'path' => $path,
+                'extension' => $extension,
+                'disk' => $disk,
+                'user_id' => Auth::user()->id,
+            ];
+            $fileRecord = File::create($fileData);
+            $data['file_id'] = $fileRecord->id;
         }
 
         try {

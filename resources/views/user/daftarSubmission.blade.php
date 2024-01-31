@@ -1,10 +1,18 @@
-@extends(Auth::user()->role_id == 1 ? 'layout.layout' : 'layouts.app')
+@extends(Auth::user()->roles->contains('id',1 ) ? 'layout.layout' : 'layouts.app')
 
 @section("title","Daftar Submission")
 
 @section("content")
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='initial-scale=1'>
+        <title>@yield('title')</title>
+        @vite('resources/css/app.css', 'resources/js/app.js')
+    </head>
     <!-- component -->
-
+        <body class="antialiased font-sans">    
             <div class="container mx-auto px-4 sm:px-8">
                 <div class="py-8">
                     <div>
@@ -58,94 +66,100 @@
                     </div>
                     <div class="-mx-8 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                            <table class="min-w-full leading-normal">
-                                <thead>
+                            <table class="w-full text-sm text-left text-gray-500">
+                                <thead class="text-xs text-gray-700 uppercase bg-blue-50">
                                     <tr>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             ID
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             No PPKB
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             PPKB Ke
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Service Code
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Nama Kapal
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Keagenan
                                         </th>
                                         <th
-                                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                            scope="col" class="px-5 py-3 ">
                                             Status
                                         </th>
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th scope="col" class="px-5 py-3 ">
                                             Tanggal Dibuat
                                         </th>
                                     </tr>
-                                </thead>
+                                </thead>    
                                 <tbody>
                                     <?php $i = $submission->firstItem() ?>
                                     @foreach ($submission as $item)
-                                    <tr>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <tr class="border-b border-gray-200 bg-white text-sm hover:bg-gray-50">
+                                        <td class="px-5 py-5">
                                             <p class="text-gray-900 whitespace-no-wrap">{{$item->id}}</p>
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             <div class="flex items-center">
-                                                <form method="POST" action="{{ route('submission.update', ['id' => $item->id]) }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="status" value="Progress">
-                                                    <button type="submit" class="text-gray-900 whitespace-no-wrap hover:underline">
-                                                        {{$item->nomor_ppkb}}
-                                                    </button>
-                                                </form>
+                                                @if (Auth::user()->roles->contains('id',3))
+                                                    <form method="POST" action="{{ route('submission.update', ['id' => $item->id]) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="status" value="Progress">
+                                                        <button type="submit" class="text-gray-900 whitespace-no-wrap font-semibold hover:underline">
+                                                            {{$item->nomor_ppkb}}
+                                                        </button>
+                                                    </form>
+                                                @else 
+                                                    <a href='{{ route('user.tampilkanSubmissionUser', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
+                                                    {{$item->nomor_ppkb}}
+                                                @endif
+                                                </a>
                                             </div>
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             <p class="text-gray-900 whitespace-no-wrap">{{$item->ppkb_ke}}</p>
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             <p class="text-gray-900 whitespace-no-wrap">
                                                 {{$item->service_code}}
                                             </p>
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             <p class='text-gray-900 whitespace-no-wrap'>{{$item->nama_kapal}}</p>
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             <p class='text-gray-900 whitespace-no-wrap'>{{$item->keagenan}}</p>
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             @if ($item->status === 'New')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">{{$item->status}}</span>
+                                                    <span class="relative text-gray-900">{{$item->status}}</span>
                                                 </span>
                                             @elseif ($item->status === 'Progress')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">{{$item->status}}</span>
+                                                    <span class="relative text-gray-900">{{$item->status}}</span>
                                                 </span>
                                             @elseif ($item->status === 'Done')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                    <span class="relative">{{$item->status}}</span>
+                                                    <span class="relative text-gray-900">{{$item->status}}</span>
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td class="px-5 py-5 ">
                                             <p class="text-gray-900 whitespace-no-wrap">{{$item->created_at->format('Y-m-d')}}</p>
                                         </td>
                                     </tr>
@@ -156,10 +170,11 @@
                             <div class="px-5 py-5 bg-white border-t flex flex-col items-center">
                                 {{ $submission->withQueryString()->links()}}
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-       
+        </body>
 @endsection

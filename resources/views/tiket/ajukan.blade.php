@@ -1,4 +1,4 @@
-@extends("layout.layout")
+@extends(Auth::user()->roles->contains('id',1 ) ? 'layout.layout' : 'layouts.app')
 
 @section("title","Ajukan Topik")
 
@@ -13,9 +13,9 @@
     </head>
     <body>
         <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Pengajuan Topik</h1>
-        <form action='{{route('tiket.store')}}' method='POST'>
+        <form action='{{route('tiket.store')}}' method='POST' enctype="multipart/form-data">
             @csrf
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 px-60 pb-10">
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 px-60 pb-10 ">
                 <div class="col-span-full">
                     <label for="judul" class="block text-sm font-medium leading-6 text-gray-900">Judul:</label>
                     <div class="mt-2">
@@ -84,11 +84,9 @@
                             <div class="mt-4 flex text-sm leading-6 text-gray-600">
                                 <label for="file" class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500">
                                     <span>Upload a file</span>
-                                    <input id="file" name="file" type="file" class=''>
+                                    <input id="file" name="file" type="file" class='form-control'>
                                 </label>
-                                <p class="pl-1">or drag and drop</p>
                             </div>
-                            <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
                         </div>
                     </div>
                 </div>

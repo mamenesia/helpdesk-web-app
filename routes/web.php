@@ -6,6 +6,7 @@ use App\Http\Controllers\Users\TiketsController;
 use App\Http\Controllers\Users\UsersController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Users\DivisiController;
+use App\Http\Controllers\Users\SubmissionController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -28,18 +29,19 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::middleware(['auth', 'user-role:0'])->group(function () {
+Route::middleware(['auth', 'user-role:2'])->group(function () {
 
     Route::get('/ajukan/user', [TiketsController::class, 'create'])->name('user.ajukan');
     Route::post('/store/user', [TiketsController::class, 'store'])->name('user.store');
     Route::get('/tiket/user/{id}', [TiketsController::class, 'tampilkan'])->name('user.tampilkan');
     Route::post('/tiket/user/reply', [TiketsController::class, 'reply'])->name('user.reply');
-    Route::post('/tiket/user/storeppkb', [TiketsController::class, 'storeppkb'])->name('user.storeppkb');
-    Route::get('/submission/user', [TiketsController::class, 'createppkb'])->name('user.submission');
-    Route::get('/daftar/submission', [TiketsController::class, 'daftarsubmission'])->name('user.daftarsubmission');
-    Route::get('/submission/user/{id}', [TiketsController::class, 'tampilkansubmission'])->name('user.tampilkansubmission');
-    Route::post('/submission/close/{id}', [TiketsController::class, 'selesai'])->name('submission.close');
-    Route::put('/submission/status-update/{id}', [TiketsController::class, 'updatesubmission'])->name('submission.update');
+    Route::post('/tiket/user/storeppkb', [SubmissionController::class, 'storeppkb'])->name('user.storeppkb');
+    Route::get('/submission/user', [SubmissionController::class, 'createppkb'])->name('user.submission');
+    Route::get('/daftar/submission', [SubmissionController::class, 'daftarsubmission'])->name('user.daftarsubmission');
+    Route::get('/submission/user/{id}', [SubmissionController::class, 'tampilkansubmission'])->name('user.tampilkansubmission');
+    Route::post('/submission/close/{id}', [SubmissionController::class, 'selesai'])->name('submission.close');
+    Route::put('/submission/status-update/{id}', [SubmissionController::class, 'updatesubmission'])->name('submission.update');
+    Route::get('/submission/user/{id}', [SubmissionController::class, 'tampilkanSubmissionUser'])->name('user.tampilkanSubmissionUser');
 });
 
 Route::middleware(['auth', 'user-role:1'])->group(function () {
@@ -52,9 +54,15 @@ Route::middleware(['auth', 'user-role:1'])->group(function () {
     Route::post('/tiket/close/{id}', [TiketController::class, 'close'])->name('tiket.close');
     Route::get('/tiket/{tiket}', [TiketController::class, 'show'])->name('tiket.show');
     Route::post('/tiket/reply', [TiketController::class, 'reply'])->name('tiket.reply');
+    Route::post('/attach-roles', [UsersController::class, 'updateRole'])->name('attach.roles');
+});
 
+Route::middleware(['auth', 'user-role:3'])->group(function () {
+    Route::get('/submission/planner/{id}', [SubmissionController::class, 'tampilkansubmission'])->name('user.tampilkansubmission');
 });
 
 Route::resource('tiket', TiketController::class);
+
+Route::get('/attach-roles', [TiketController::class, 'showAttachRolesForm'])->name('attach.roles.form');
 
 

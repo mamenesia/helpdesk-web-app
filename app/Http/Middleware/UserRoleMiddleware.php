@@ -19,7 +19,7 @@ class UserRoleMiddleware
     {
         if (Auth::check()) {
             // Check if the user has the required role
-            if (Auth::user()->role_id == $role_id) {
+            if (Auth::user()->roles->contains('id', $role_id)) {
                 return $next($request);
             } else {
                 return response()->json(["error" => "You don't have permission to access this page"]);
@@ -28,7 +28,5 @@ class UserRoleMiddleware
             // Handle the case where the user is not authenticated
             return response()->json(["error" => "Unauthorized"]);
         }
-
-
     }
 }

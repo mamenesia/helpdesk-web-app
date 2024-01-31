@@ -11,7 +11,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container mx-auto flex flex-wrap items-center">
                     <div class='flex w-full md:w-1/2 justify-center md:justify-start'>
-                        <a href="{{ route('welcome') }}">
+                        <a href="/">
                             <img src="https://i.postimg.cc/d00WBTtr/logo.png" alt="logo" class="h-14 w-auto py-2">
                         </a>
                     </div>
