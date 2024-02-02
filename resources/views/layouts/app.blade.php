@@ -24,6 +24,7 @@
                                 <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
                                     <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="{{route("user.submission")}}">Ajukan Submission</a></li>
                                     <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="{{route('user.daftarsubmission')}}">Daftar Submission</a></li>
+                                    
                                 </ul>
                             </li>
                             
@@ -35,6 +36,7 @@
                                     </a>
                                     <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">
                                         <li><a class="text-black hover:text-blue-400 py-2 pl-4 pr-8 block bg-white" href="{{route('user.tiketsaya')}}">Tiket Saya</a></li>
+                                        <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="{{route('user.submissionsaya')}}">Submission Saya</a></li>
                                         <li><a class="rounded-b text-black hover:text-blue-400 py-2 px-4 block bg-white" href="#"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

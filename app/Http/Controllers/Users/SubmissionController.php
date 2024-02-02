@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Exports\SubmissionExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class SubmissionController extends Controller
@@ -76,7 +78,7 @@ class SubmissionController extends Controller
             return redirect()->back()->with('error', 'Ticket not found');
         }
 
-        $submission->status = "Done";
+        $submission->status = "Sudah Ditetapkan";
         $submission->closed_by = Auth::user()->id;
         $submission->closed_at = now();
         $submission->save();
@@ -97,5 +99,19 @@ class SubmissionController extends Controller
     {
         $submission = Submission::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.daftarSubmission', compact('submission'));
+    }
+    public function submissionsaya()
+    {
+        $user = Auth::user();
+
+        $submission = $user->submission()->orderBy('id', 'desc')->paginate(10);
+
+        return view('user.submissionsaya', compact('submission'));
+    }
+    public function export(Request $request, $user_id)
+    {
+        $from_date = $request->query('from_date');
+        $to_date = $request->query('to_date');
+        return Excel::download(new SubmissionExport($user_id, $from_date, $to_date), 'Submission_' . $from_date . '_to_' . $to_date . '.xlsx');
     }
 }

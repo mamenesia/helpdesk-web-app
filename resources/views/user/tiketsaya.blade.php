@@ -12,8 +12,6 @@
                     </div>
                     <div class='flex'>
                         <a href='{{route('user.ajukan')}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-bold rounded-lg px-5 py-2 mb-2 bg-stone-200 hover:bg-stone-300">+</a>
-                        <!-- drawer init and show -->
-                        
                     </div>
                     <div class="-mx-8 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -57,7 +55,7 @@
                                         <td class="px-5 py-5">
                                             <p class="text-gray-900 whitespace-no-wrap">{{$item->id}}</p>
                                         </td>
-                                        <td class="px-5 py-5>
+                                        <td class="px-5 py-5">
                                             <div class="flex items-center">
                                                 <a href='{{ route('user.tampilkan', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
                                                     {{$item->judul}}

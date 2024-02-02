@@ -22,7 +22,7 @@
                         <a href='{{route('user.submission')}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-bold rounded-lg px-5 py-2 mb-2 bg-stone-200 hover:bg-stone-300">+</a>
                         <!-- drawer init and show -->
                         <div class="px-2">
-                            <button class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-3 focus:ring-blue-300 font-bold rounded-lg text-sm px-8 py-2.5 mb-2 " type="button" data-drawer-target="drawer-form" data-drawer-show="drawer-form" aria-controls="drawer-form">
+                            <button class="text-black text-md focus:ring-3 focus:ring-blue-300 font-semibold rounded-lg px-5 py-2 mb-2 bg-blue-200 hover:bg-blue-300 " type="button" data-drawer-target="drawer-form" data-drawer-show="drawer-form" aria-controls="drawer-form">
                             Filters
                             </button>
                         </div>
@@ -152,7 +152,7 @@
                                                     <span aria-hidden class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
                                                     <span class="relative text-gray-900">{{$item->status}}</span>
                                                 </span>
-                                            @elseif ($item->status === 'Done')
+                                            @elseif ($item->status === 'Sudah Ditetapkan')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                                     <span class="relative text-gray-900">{{$item->status}}</span>

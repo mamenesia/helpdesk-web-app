@@ -19,10 +19,9 @@
                         <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Daftar Submission</h1>
                     </div> 
                     <div class='flex'>
-                        <a href='{{route('user.submission')}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-bold rounded-lg px-5 py-2 mb-2 bg-stone-200 hover:bg-stone-300">+</a>
                         <!-- drawer init and show -->
                         <div class="px-2">
-                            <button class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-3 focus:ring-blue-300 font-bold rounded-lg text-sm px-8 py-2.5 mb-2 " type="button" data-drawer-target="drawer-form" data-drawer-show="drawer-form" aria-controls="drawer-form">
+                            <button class="text-black text-md focus:ring-3 focus:ring-blue-300 font-semibold rounded-lg px-5 py-2 mb-2 bg-blue-200 hover:bg-blue-300 " type="button" data-drawer-target="drawer-form" data-drawer-show="drawer-form" aria-controls="drawer-form">
                             Filters
                             </button>
                         </div>

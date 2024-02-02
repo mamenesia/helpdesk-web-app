@@ -42,6 +42,8 @@ Route::middleware(['auth', 'user-role:2'])->group(function () {
     Route::post('/submission/close/{id}', [SubmissionController::class, 'selesai'])->name('submission.close');
     Route::put('/submission/status-update/{id}', [SubmissionController::class, 'updatesubmission'])->name('submission.update');
     Route::get('/submission/user/{id}', [SubmissionController::class, 'tampilkanSubmissionUser'])->name('user.tampilkanSubmissionUser');
+    Route::get('/submission', [SubmissionController::class, 'submissionsaya'])->name('user.submissionsaya');
+    Route::get('submissions/export/{user_id}', [SubmissionController::class, 'export']);
 });
 
 Route::middleware(['auth', 'user-role:1'])->group(function () {

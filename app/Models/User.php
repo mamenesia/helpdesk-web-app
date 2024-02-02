@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Divisi::class, 'divisi_id');
     }
+    public function submission()
+    {
+        return $this->hasMany(Submission::class, 'user_id');
+    }
 }

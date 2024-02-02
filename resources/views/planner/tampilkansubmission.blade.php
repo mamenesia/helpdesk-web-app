@@ -55,7 +55,7 @@
                                     <span aria-hidden class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
                                     <span class="relative">{{$submission->status}}</span>
                                 </span>
-                            @elseif ($submission->status === 'Done')
+                            @elseif ($submission->status === 'Sudah Ditetapkan')
                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                     <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                     <span class="relative">{{$submission->status}}</span>
@@ -68,9 +68,20 @@
                 <div class= 'flex flex-col'>
                     <a class="mb-3 text-3xl font-normal text-gray-900">{{$submission->nomor_ppkb}}</a>
                     <a class="mb-3 text-xl font-normal text-gray-600">PPKB Ke: {{$submission->ppkb_ke}}</a>
-                    <a class="mb-3 text-sm font-normal text-gray-500">Service Code: {{$submission->service_code}}</a>
-                    <a class="mb-3 text-sm font-normal text-gray-500">Nama Kapal: {{$submission->nama_kapal}}</a>
-                    <a class="mb-3 text-sm font-normal text-gray-500">Keagenan: {{$submission->keagenan}}</a>
+                    <div class='overflow-x-auto flex flex-wrap'>
+                        <a class="block w-full sm:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+                            <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Service Code</h5>
+                            <p class="font-normal text-md text-gray-700 ">{{$submission->service_code}}</p>
+                        </a>
+                        <a class="block w-full sm:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+                            <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Nama Kapal</h5>
+                            <p class="font-normal text-md text-gray-700 ">{{$submission->nama_kapal}}</p>
+                        </a>
+                        <a class="block w-full sm:w-1/3 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 ">
+                            <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Keagenan</h5>
+                            <p class="font-normal text-md text-gray-700 ">{{$submission->keagenan}}</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
