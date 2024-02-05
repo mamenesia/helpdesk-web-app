@@ -85,6 +85,18 @@ class SubmissionController extends Controller
 
         return redirect()->back()->with('success', 'Ticket closed');
     }
+    public function reopen($id)
+    {
+        $submission = Submission::find($id);
+        if (!$submission) {
+            return redirect()->back()->with('error', 'Ticket not found');
+        }
+
+        $submission->status = "New";
+        $submission->save();
+
+        return redirect()->back()->with('success', 'Ticket reopened');
+    }
     public function tampilkanSubmissionUser($id)
     {
         $submission = Submission::find($id);

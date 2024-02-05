@@ -31,7 +31,7 @@
                             <!-- Authentication Links -->
 
                                 <li class="mr-3 group/item">
-                                    <a class="text-black no-underline inline-block py-2 px-4 " href="#">
+                                    <a class="text-black no-underline inline-block py-2 px-4 bg-white" href="#">
                                         <span>{{ Auth::user()->nama }}</span>
                                     </a>
                                     <ul class="group/edit group-hover/item:visible absolute invisible text-blue-200 shadow-lg">

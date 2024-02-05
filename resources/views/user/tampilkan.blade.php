@@ -17,7 +17,7 @@
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class='container mx-auto flex flex-wrap items-center'>
                     <div class='flex w-full content-center justify-start md:w-1/2 '>
-                        <a class='pr-3' href='{{route('user.tiketsaya')}}'>
+                        <a class='pr-3' href='{{url()->previous()}}' title="Back">
                             <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" fill="white"/>
                                 <path d="M14.5 17L9.5 12L14.5 7" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
@@ -33,7 +33,7 @@
                     </div>
                     <div class='flex w-full content-center md:justify-end md:w-1/2'>
                         <a>
-                            <h5 class="mb-2 text-2xl font-bold text-end tracking-tight text-gray-900">Tiket #{{$tiket->id}}</h5>
+                            <h5 class="mb-2 text-2xl font-bold text-end tracking-tight text-gray-900">Tiket #{{$tiket->ticket_id}}</h5>
                         </a>
                         <a class='px-2 pt-1'>
                             @if ($tiket->status->nama_status === 'Open')

@@ -151,7 +151,7 @@
                                                     <span aria-hidden class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
                                                     <span class="relative text-gray-900">{{$item->status}}</span>
                                                 </span>
-                                            @elseif ($item->status === 'Done')
+                                            @elseif ($item->status === 'Sudah Ditetapkan')
                                                 <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
                                                     <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                                     <span class="relative text-gray-900">{{$item->status}}</span>

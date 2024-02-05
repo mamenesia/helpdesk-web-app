@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Prioritas;
 use App\Models\Reply;
 use App\Models\File;
+use App\Models\User;
+use App\Notifications\TicketReplyReceived;
 use Illuminate\Support\Str;
 
 class TiketsController extends Controller
@@ -77,6 +79,9 @@ class TiketsController extends Controller
             $data['file_id'] = $fileRecord->id;
         }
 
+        $user = Auth::user();
+        $data['ticket_id'] = Tiket::generateTicketId($user);
+
         try {
             Tiket::create($data);
             return redirect()->route('user.tiketsaya')->with('success', 'Tiket berhasil ditambahkan');
@@ -132,7 +137,9 @@ class TiketsController extends Controller
 
         }
         try {
-            Reply::create($data);
+            $reply = Reply::create($data);
+            $user = User::find($request->user_id);
+            $user->notify(new TicketReplyReceived($reply));
             return redirect()->route('user.tampilkan', $request->tiket_id)->with('success', 'Balasan berhasil ditambahkan');
         } catch (\Exception $e) {
             return ("Gagal menambahkan balasan " . $e->getMessage());

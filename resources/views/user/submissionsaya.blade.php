@@ -97,9 +97,15 @@
                                         </td>
                                         <td class="px-5 py-5">
                                             <div class="flex items-center">
-                                                <a href='{{ route('user.tampilkansubmission', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
+                                                @if (Auth::user()->roles->contains('id',3))
+                                                    <a href='{{ route('user.tampilkansubmission', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
                                                     {{$item->nomor_ppkb}}
-                                                </a>
+                                                    </a>
+                                                @else 
+                                                    <a href='{{ route('user.tampilkanSubmissionUserf    ', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
+                                                    {{$item->nomor_ppkb}}
+                                                    </a>
+                                                @endif
                                             </div>
                                         </td>
                                         <td class="px-5 py-5">

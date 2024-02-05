@@ -147,6 +147,8 @@ class TiketController extends Controller
             $data['file_id'] = $fileRecord->id;
         }
 
+        $user = Auth::user();
+        $data['ticket_id'] = Tiket::generateTicketId($user);
         try {
             Tiket::create($data);
             return redirect()->route('tiket.daftar')->with('success', 'Tiket berhasil ditambahkan');
@@ -238,5 +240,17 @@ class TiketController extends Controller
         $tiket->update(['prioritas_id' => $validatedData['prioritas']]);
 
         return redirect()->back()->with('success', 'Prioritas updated successfully');
+    }
+    public function reopen($id)
+    {
+        $tiket = Tiket::find($id);
+        if (!$tiket) {
+            return redirect()->back()->with('error', 'Ticket not found');
+        }
+
+        $tiket->status_id = 1;
+        $tiket->save();
+
+        return redirect()->back()->with('success', 'Ticket has been reopened');
     }
 }

@@ -20,9 +20,28 @@ class Tiket extends Model
         'divisi_id',
         'user_id',
         'status_id',
-        'file_id'
+        'file_id',
+        'ticket_id'
     ];
+    public static function generateTicketId($user)
+    {
+        $date = date('Ymd'); // Get the current date in the format YYYYMMDD
+        $userId = $user->id; // Get the user's ID
 
+        // Get the last ticket created by the user today
+        $lastTicket = self::where('user_id', $userId)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        // If the user has created a ticket today, increment the last number, otherwise start at 1
+        $lastNumber = $lastTicket ? (int) substr($lastTicket->ticket_id, -1) + 1 : 1;
+
+        // Generate the ticket ID
+        $ticket_id = $userId . $date . str_pad($lastNumber, 3, '0', STR_PAD_LEFT);
+
+        return $ticket_id;
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
