@@ -114,7 +114,7 @@
                                     @foreach ($data as $item)
                                     <tr class="border-b border-gray-200 bg-white text-sm hover:bg-gray-50">
                                         <td class="px-5 py-5 ">
-                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->id}}</p>
+                                            <p class="text-gray-900 whitespace-no-wrap">{{$item->ticket_id}}</p>
                                         </td>
                                         <td class="px-5 py-5 ">
                                             <div class="flex items-center">
