@@ -25,7 +25,7 @@ class Tiket extends Model
     ];
     public static function generateTicketId($user)
     {
-        $date = date('Ymd'); // Get the current date in the format YYYYMMDD
+        $date = date('ymd'); // Get the current date in the format YYYYMMDD
         $userId = $user->id; // Get the user's ID
 
         // Get the last ticket created by the user today

@@ -14,7 +14,7 @@
     <body>
         <h1 class="text-5xl font-bold text-gray-900 py-4 text-center tracking-wide leading-snug">Pengajuan Topik</h1>
         <div class='flex container mx-auto sm:px-12'>
-            <a href='{{route('user.tiketsaya')}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-semibold rounded-lg px-5 py-2 mb-2 bg-blue-200 hover:bg-blue-300">
+            <a href='{{url()->previous()}}' class="text-black text-md focus:ring-3 focus:ring-blue-300 font-semibold rounded-lg px-5 py-2 mb-2 bg-blue-200 hover:bg-blue-300">
             <svg width="24px" height="24px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="#000000" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/><path fill="#000000" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/></svg>
             </a>
         </div>
@@ -24,14 +24,14 @@
                 <div class="col-span-full">
                     <label for="judul" class="block text-sm font-medium leading-6 text-gray-900">Judul:</label>
                     <div class="mt-2">
-                        <input type="text" name="judul" value="{{ Session::get('judul')}}" id="judul" autocomplete="judul" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="judul" value="{{ Session::get('judul')}}" id="judul" autocomplete="judul" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
                 <div class="col-span-full">
                     <label for="pengaju" class="block text-sm font-medium leading-6 text-gray-900">Pengaju:</label>
                     <div class="mt-2">
-                        <input type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                        <input required type="text" name="pengaju" value="{{ Session::get('pengaju')}}" id="pengaju" autocomplete="pengaju" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@
                 <div class="col-span-full">
                     <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Deskripsi:</label>
                     <div class="mt-2">
-                        <textarea id="deskripsi" name="deskripsi" value="{{ Session::get('deskripsi')}}" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
+                        <textarea required id="deskripsi" name="deskripsi" value="{{ Session::get('deskripsi')}}" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
                     </div>
                     <p class="mt-3 text-sm leading-6 text-gray-600">Tulis deskripsi untuk tiket yang akan diaju.</p>
                 </div>

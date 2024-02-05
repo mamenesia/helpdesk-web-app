@@ -102,7 +102,7 @@
                                                     {{$item->nomor_ppkb}}
                                                     </a>
                                                 @else 
-                                                    <a href='{{ route('user.tampilkanSubmissionUserf    ', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
+                                                    <a href='{{ route('user.tampilkanSubmissionUser', ['id' => $item->id])}}' class="text-gray-900 font-semibold whitespace-no-wrap hover:underline">
                                                     {{$item->nomor_ppkb}}
                                                     </a>
                                                 @endif
