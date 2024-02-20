@@ -17,10 +17,10 @@
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class='container mx-auto flex flex-wrap items-center'>
                     <div class='flex w-full content-center justify-start md:w-1/2 '>
-                        @if (Auth::user()->roles->contains('id', 2 ))
-                        <a class='pr-3' href='{{route('user.submissionsaya')}}' title="Back">
-                        @else
+                        @if (Auth::user()->roles->contains('id', 3 ))
                         <a class='pr-3' href='{{route('user.daftarsubmission')}}' title="Back">
+                        @else
+                        <a class='pr-3' href='{{route('user.submissionsaya')}}' title="Back">
                             @endif
                             <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" fill="white"/>
@@ -37,7 +37,7 @@
                                 </svg>
                             </button>
                         </form>
-                        <form method="POST" action="{{ route('submission.reopen', ['id' => $tiket->id]) }}" title="Reopen">
+                        <form method="POST" action="{{ route('submission.reopen', ['id' => $submission->id]) }}" title="Reopen">
                             @csrf
                             <button class="pt-1 pl-2" type="submit" title="Reopen">
                                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

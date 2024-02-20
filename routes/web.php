@@ -23,7 +23,6 @@ Auth::routes();
 Route::middleware(['throttle:60,1'])->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/tiketsaya', [TiketsController::class, 'tiketsaya'])->name('user.tiketsaya');
 });
 
 
@@ -45,6 +44,7 @@ Route::middleware(['auth', 'user-role:2', 'throttle:60,1'])->group(function () {
     Route::get('/submission/user/{id}', [SubmissionController::class, 'tampilkanSubmissionUser'])->name('user.tampilkanSubmissionUser');
     Route::get('/submission', [SubmissionController::class, 'submissionsaya'])->name('user.submissionsaya');
     Route::get('submissions/export/{user_id}', [SubmissionController::class, 'export']);
+    Route::get('/tiketsaya', [TiketsController::class, 'tiketsaya'])->name('user.tiketsaya');
 });
 
 Route::middleware(['auth', 'user-role:1', 'throttle:60,1'])->group(function () {
