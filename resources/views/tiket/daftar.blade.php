@@ -9,7 +9,7 @@
         <meta charset='UTF-8'>
         <meta name='viewport' content='initial-scale=1'>
         <title>@yield('title')</title>
-        @vite('resources/css/app.css', 'resources/js/app.js')
+        
     </head>
     <!-- component -->
         <body class="antialiased font-sans">
