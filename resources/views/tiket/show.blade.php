@@ -3,14 +3,7 @@
 @section("title","Daftar Topik")
 
 @section("content")
-<!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='initial-scale=1'>
-        <title>@yield('title')</title>
-        @vite('resources/css/app.css', 'resources/js/app.js')
-    </head>
+
     <!-- component -->
     <body class="antialiased font-sans ">
         <div class='mx-auto container flex flex-wrap items-center min-w-7xl py-8'>
