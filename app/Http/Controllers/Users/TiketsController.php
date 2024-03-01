@@ -86,7 +86,7 @@ class TiketsController extends Controller
             Tiket::create($data);
             return redirect()->route('user.tiketsaya')->with('success', 'Tiket berhasil ditambahkan');
         } catch (\Exception $e) {
-            return ("Gagal menambahkan tiket " . $e->getMessage());
+            return("Gagal menambahkan tiket " . $e->getMessage());
         }
     }
 
@@ -137,12 +137,11 @@ class TiketsController extends Controller
 
         }
         try {
-            $reply = Reply::create($data);
-            $user = User::find($request->user_id);
-            $user->notify(new TicketReplyReceived($reply));
+            Reply::create($data);
+
             return redirect()->route('user.tampilkan', $request->tiket_id)->with('success', 'Balasan berhasil ditambahkan');
         } catch (\Exception $e) {
-            return ("Gagal menambahkan balasan " . $e->getMessage());
+            return("Gagal menambahkan balasan " . $e->getMessage());
         }
     }
 }

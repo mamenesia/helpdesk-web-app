@@ -52,7 +52,7 @@ class LoginController extends Controller
                 return redirect()->route('user.tiketsaya');
             }
         } else {
-            return redirect()->route('login')->with('error', 'Incorrect username or password');
+            return redirect()->route('login')->with('error', 'NIPP atau password salah');
         }
     }
 

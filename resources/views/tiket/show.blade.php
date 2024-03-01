@@ -171,7 +171,57 @@
             });
             src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"
         </script>
-        
+        <script>
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                var fileName = e.target.files[0].name;
+                document.getElementById('balasan').placeholder = fileName;
+            });
+        </script>
+        <script>
+            let dropArea = document.getElementById('balasan');
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight(e) {
+            dropArea.style.background = '#f0f0f0';
+            }
+
+            function unhighlight(e) {
+            dropArea.style.background = '#ffffff';
+            }
+
+            dropArea.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+
+            handleFiles(files);
+            }
+
+            function handleFiles(files) {
+            ([...files]).forEach(uploadFile);
+            }
+
+            function uploadFile(file) {
+            // You can upload the file here using fetch or AJAX
+            console.log(file);
+            }
+        </script>
     </body>
 </html>
 @endsection

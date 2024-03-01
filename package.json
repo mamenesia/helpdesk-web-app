@@ -1,9 +1,15 @@
 {
-    "private": true,
+    "name": "helpdesk-app",
+    "version": "1.1.0",
+    "main": "index.js",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "development": "mix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/balboel/helpdesk-app.git"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
